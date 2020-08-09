@@ -8,9 +8,11 @@ module.exports = {
     entry: SRC_DIR+'/js/index.js',
     // entry: './src/js/index.js',
     output: {
-        path: DIST_DIR+'/js',
+        path: DIST_DIR,
         // path: path.resolve(__dirname, 'dist/js'),
-        filename: 'bundle.js'
+        filename: 'js/bundle.js'
     },
-    mode: 'development'
+    devServer: {
+        contentBase: './dist'
+    }
 };
