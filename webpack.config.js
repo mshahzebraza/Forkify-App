@@ -1,4 +1,5 @@
 const path = require('path'); 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var DIST_DIR = path.resolve(__dirname,'dist');
 var SRC_DIR = path.resolve(__dirname,'src');
@@ -14,5 +15,12 @@ module.exports = {
     },
     devServer: {
         contentBase: './dist'
-    }
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            // Options here... Options are passed in form of arrays as a standard in JS
+            filename: 'index.html',
+            template: SRC_DIR + '/index.html'
+        })
+    ]
 };
