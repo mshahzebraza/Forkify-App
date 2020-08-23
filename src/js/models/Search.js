@@ -20,10 +20,17 @@ export default class Search {
                 console.log(``);
             }) );
              */
-            
+
         } catch (error) {
             alert(error)
         }
 
     }
 }
+
+// NOTES 
+/* 
+This Module is used to export the functionality of a search module into the main index.js file where we will only be able to use the functionality without needed to fill the whole file with all this code... 
+In other words, MVC is being implemented in such a way that the functional units are coded in some file and are made accessible in the main index.js file so that the main file remains neat and clean!
+After importing the functionality we'll be able to use the module and hence an object will be created from the search will be most likely saved in some are other than the main index.js file.
+*/
