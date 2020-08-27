@@ -13,14 +13,6 @@ export default class Search {
             const result = await axios(`${APIpath}?q=${this.query}`);
             this.recipes = result.data.recipes; // an array of recipe objects
 
-            /* 
-            console.log(this.recipes.forEach(el => {
-                console.log(el.title);      
-                console.log(el);      
-                console.log(``);
-            }) );
-             */
-
         } catch (error) {
             alert(error)
         }
