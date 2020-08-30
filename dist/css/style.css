@@ -236,6 +236,7 @@ body {
     padding: 1.5rem 3rem;
     transition: all .3s;
     border-right: 1px solid #fff;
+    background-color: unset;
     text-decoration: none; }
   .results__link:hover,
   .likes__link:hover {
