@@ -83,7 +83,7 @@ body {
   padding: .8rem 1.2rem;
   border-radius: 10rem;
   cursor: pointer;
-  display: flex;
+  /* display: inline-flex; */
   align-items: center;
   transition: all .2s; }
   .btn-inline svg {
@@ -294,11 +294,11 @@ body {
       content: "";
       display: table;
       clear: both; }
-  .results__btn--prev,
+  .results__btn-type-prev,
   .likes__btn--prev {
     float: left;
     flex-direction: row-reverse; }
-  .results__btn--next,
+  .results__btn-type-next,
   .likes__btn--next {
     float: right; }
 
