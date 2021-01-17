@@ -9,7 +9,7 @@ export default class Recipe {
     async getRecipe() {
         try {
             const res = await axios(`${APIpath}get?rId=${this.id}`);
-            console.log(res);
+            // console.log(res);
             this.title = res.data.recipe.title;
             this.author = res.data.recipe.publisher;
             this.img = res.data.recipe.image_url;

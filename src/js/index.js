@@ -61,6 +61,8 @@ const controlRecipe = async () => {
 
             // Render Recipe
             console.log(state.recipe);
+
+            // parse Ingredients
             
             
         } catch (error) {
@@ -85,7 +87,8 @@ elements.searchForm.addEventListener('submit', e => {
 elements.searchResPages.addEventListener('click', e=>{
     const btn = e.target.closest('.btn-inline')
     if (btn) {
-        const gotoPage = parseInt(btn.dataset.goto, 10);
+        const gotoPage = parseInt(btn.dataset.goto, 10); // The Key // the dataset attribute of the button element is read here to know which page does the user clicking to go 
+        // !!!!!!!!!!! ^^^ Important ^^^ !!!!!!!!!!!
         searchView.clearResults();
         searchView.renderResults(state.search.recipes, gotoPage);
     }

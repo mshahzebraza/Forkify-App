@@ -6,7 +6,9 @@ export const elements = {
     searchResPages: document.querySelector('.results__pages')
 }
 
-export const elementStrings = {
+// Why do we need to export this object... this wont affect the performance
+// export const elementStrings = {
+const elementStrings = {
     loader : `loader`
 }
 

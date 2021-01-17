@@ -297,6 +297,7 @@ body {
   .results__btn-type-prev,
   .likes__btn--prev {
     float: left;
+    display: inline-flex;
     flex-direction: row-reverse; }
   .results__btn-type-next,
   .likes__btn--next {

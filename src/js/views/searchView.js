@@ -23,7 +23,7 @@ const limitString = (el, limit=20) => {
             if ( acc+cur.length < limit ) {
                 newTitle.push(cur)
             }
-            return acc += cur.length + 1;
+            return acc += cur.length + 1; // to accomodate the spaces between the words
         }, 0)
         
         return `${newTitle.join(' ')} ...`;
@@ -51,10 +51,10 @@ const renderRecipe = recipe => {
 
 const createButton = (page,type)=> `
     <button class="btn-inline results__btn-type-${type}" data-goto="${type === 'prev' ? page-1: page+1}">
+        <span>Page ${type === 'prev' ? page-1: page+1}</span>
         <svg class="search__icon">
             <use href="img/icons.svg#icon-triangle-${type === 'prev' ? 'left': 'right'}"></use>
         </svg>
-        <span>Page ${type === 'prev' ? page-1: page+1}</span>
     </button>
 `
 
@@ -86,7 +86,7 @@ const renderButtons = (curPage, numResults,resPerPage)=>{
 export const renderResults = (res, page=1, resPerPage=10) => {
     // Render Results of Current Page
     const start=(page-1)*resPerPage;
-    const end=page*resPerPage;
+    const end=page*resPerPage; //end value is not returned by the slice method
     res.slice(start,end).forEach(renderRecipe);
 
     // Render Pagination
