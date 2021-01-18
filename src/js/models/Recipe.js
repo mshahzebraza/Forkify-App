@@ -31,4 +31,85 @@ export default class Recipe {
         this.servings = 4;
     }
     
+    
+    parseIngredients() {
+
+        const unitsLong = ['tablespoons','tablespoon','ounces','ounce','teaspoons','teaspoon','cups','slices','pounds']
+        const unitsShort = ['tbsp','tbsp','oz','oz','tsp','tsp','cup','slice','pound']
+        
+        const newIngredients = this.ingredients.map(el => {
+
+
+            // 1. HOMOGENOUS UNIT
+
+            // lower casing each ingredient sentence
+            let curIngredient = el.toLowerCase();
+            
+            // changing plural units to singular units
+            unitsLong.forEach((unit, idx) => {
+                curIngredient = curIngredient.replace(unit, unitsShort[idx]);
+            });
+                        
+
+            // 2. REMOVE PARANTHESIS
+
+            curIngredient = curIngredient.replace(/ *\([^)]*\) */g, " ");
+            // console.log(curIngredient);
+            
+            let arrIngredient = curIngredient.split(" ");
+            // console.log(arrIngredient);
+
+            // check which first word of the current Ingredient sentence matches any entry of the unitsShort array (returns -1 if no unit is found)
+            const unitIndex = arrIngredient.findIndex( curWordIngredient => unitsShort.includes(curWordIngredient));
+            // console.log(unitIndex);
+            // console.log('');
+
+            let objIngredient ;
+            
+            
+
+            // 3. PARSE INGREDIENTS INTO COUNT AND INGREDIENT 
+            if (unitIndex > -1) {
+                // Has Unit , Has Count // True if unit is matched at any place of the sentence
+                objIngredient= {
+                    // count: eval( arrIngredient.slice(0,unitIndex+1).join("+") ), // ERROR Here!
+                    count: eval( arrIngredient.slice(0,unitIndex).join("+") ), // means everything before the unitIndex is coerced into the 'Count'
+                    unit: arrIngredient[unitIndex],
+                    ingredient: arrIngredient.slice(1).join(" ")
+                }
+                // console.log(objIngredient);
+
+            } else if ( parseInt(arrIngredient[0], 10) ) {
+                // No Unit, Has Count // True if first entry is coerced into a 'Count'
+
+                // console.log(typeof(parseInt(arrIngredient[0], 10)));
+                objIngredient= {
+                    // count: eval( parseInt(arrIngredient[0], 10).replace("-", "+") ), // ERROR here !
+                    count: eval( arrIngredient[0].replace("-", "+") ),
+                    unit: "",
+                    ingredient: arrIngredient.slice(1).join(' ') // everything other than the first entry is assumed to be the ingredient text.
+                }
+                // console.log(objIngredient);
+                
+            } else if (unitIndex === -1) {
+                // No Unit, No Count // True if unit was never matched with any word of ingredient sentence.
+
+                objIngredient= {
+                    count: 1,
+                    unit: "",
+                    ingredient: curIngredient
+                }
+                // console.log(objIngredient);
+
+            }
+            
+           return curIngredient; 
+        //    return objIngredient; 
+        });
+        this.ingredients = newIngredients;        
+        // console.log(this.ingredients);
+        
+    }
+
+    
 }

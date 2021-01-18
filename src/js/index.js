@@ -11,7 +11,10 @@ const state = {};
 const controlSearch = async () => {
 
     // 1. Read query from view
-    const query = searchView.getInput();
+    // const query = searchView.getInput();
+    // Testing
+    const query = 'pizza';
+    
 
     if (query) {
 
@@ -50,7 +53,8 @@ const controlRecipe = async () => {
         
         // Create the recipe object from class and save into the state object
         state.recipe = new Recipe(id);
-
+        // Testing
+        // window.r = state.recipe ;
         try {
             // Get Recipes using the Id
             await state.recipe.getRecipe();
@@ -60,13 +64,13 @@ const controlRecipe = async () => {
             state.recipe.calcServing();
 
             // Render Recipe
-            console.log(state.recipe);
+            console.log(state.recipe.ingredients);
+            state.recipe.parseIngredients();
+            console.log(state.recipe.ingredients);
 
-            // parse Ingredients
-            
             
         } catch (error) {
-            alert('Error Processing the Recipe!')
+            alert(error)
         }
         
     }
@@ -79,6 +83,12 @@ const controlRecipe = async () => {
 
 // To Avoid the reload on submit & trigger the controlSearch
 elements.searchForm.addEventListener('submit', e => {
+    e.preventDefault();
+    controlSearch();
+})
+
+// Testing
+window.addEventListener('load', e => {
     e.preventDefault();
     controlSearch();
 })
