@@ -1,7 +1,7 @@
 import { elements } from "./base";
 
-const createIngredient = (curIng)=> 
-        `<li class="recipe__item">
+const createIngredient = (curIng)=> {
+        const ingredientMarkup = `<li class="recipe__item">
             <svg class="recipe__icon">
                 <use href="img/icons.svg#icon-check"></use>
             </svg>
@@ -11,6 +11,9 @@ const createIngredient = (curIng)=>
                 ${curIng.ingredient}
             </div>
         </li>`;
+        console.log(elements.ingredientList);
+        elements.ingredientList.insertAdjacentHTML("beforeend",ingredientMarkup)
+    }
 
 export const renderRecipe = recipe => {
     let markup = `
@@ -61,7 +64,6 @@ export const renderRecipe = recipe => {
 
         <div class="recipe__ingredients">
             <ul class="recipe__ingredient-list">
-        ${recipe.ingredients.map(curIng => createIngredient(curIng) )}
             </ul>
 
             <button class="btn-small recipe__btn">
@@ -88,4 +90,5 @@ export const renderRecipe = recipe => {
         </div>    
     `
     elements.recipe.insertAdjacentHTML('afterbegin', markup)
+    recipe.ingredients.map(curIng => createIngredient(curIng) )
 }
