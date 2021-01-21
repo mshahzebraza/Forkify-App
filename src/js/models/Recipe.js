@@ -39,62 +39,39 @@ export default class Recipe {
         
         const newIngredients = this.ingredients.map((el,ido) => {
 
-
             // 1. HOMOGENOUS UNIT
-
-            // lower casing each ingredient sentence
-            let curIngredient = el.toLowerCase();
-            
-            // changing plural units to singular units
-            unitsLong.forEach((unit, idx) => {
-                curIngredient = curIngredient.replace(unit, unitsShort[idx]);
-            });
-                        
+            let curIngredient = el.toLowerCase(); // lower casing
+            unitsLong.forEach((unit, idx) => curIngredient = curIngredient.replace( unit, unitsShort[idx] ) ); // plural to singular units
 
             // 2. REMOVE PARANTHESIS
-
             curIngredient = curIngredient.replace(/ *\([^)]*\) */g, " ");
-            // console.log(curIngredient);
-            
-            let arrIngredient = curIngredient.split(" ");
-            // console.log(arrIngredient);
 
-            // check which first word of the current Ingredient sentence matches any entry of the unitsShort array (returns -1 if no unit is found)
-            const unitIndex = arrIngredient.findIndex( curWordIngredient => unitsShort.includes(curWordIngredient));
-            // if (unitIndex>3) {
-                
-            // }
-            // if (ido===5) {       
-                // console.log('hi1');
-                // console.log( unitIndex);
-            // }
-            // console.log(unitIndex);
-            // console.log('');
+            let arrIngredient = curIngredient.split(" ");
+            const unitIndex = arrIngredient.findIndex( curWordIngredient => unitsShort.includes(curWordIngredient)); // the place of first identified unit
 
             let objIngredient ;
 
+            
             // 3. PARSE INGREDIENTS INTO COUNT AND INGREDIENT 
-            if (unitIndex > -1) {
-                // Has Unit , Has Count // True if unit is matched at any place of the sentence
-                const arrCount = arrIngredient.slice(0,unitIndex);
-                console.log(`test ${ido}`);
-                console.log(`unitNumber ${unitIndex}`);
+            if (unitIndex > -1 && arrIngredient.slice(0,unitIndex).length <= 2) {
+                /* 
+                Condition 1: If any unit is found in the ingredient 
+                Condition 2: If the words before the unit found is <=3 (to avoid extra words being mistaken as numbers.... Error related to recipe_id: 54454)
+                */
                 
-                // Code Block 1 - Start
+                const arrCount = arrIngredient.slice(0,unitIndex);
+
                 let count;
+                
                 if ( arrCount.length === 1 ) {
-                    count = eval( arrIngredient[0].replace("-","+") ) // means the first entry of ingredient array is the count but make sure to replace the negative sign
-                    // count = arrIngredient[0].replace("-","+") // means the first entry of ingredient array is the count but make sure to replace the negative sign
+                    count = eval( arrIngredient[0].replace("-","+") ) //(first entry of arrIngredient is the count but make sure to replace the -ve sign)
                 } else {
                     count = eval( arrCount.join('+') )
                 }
-                // Code Block 1 - End
+                // Alternative to If-Else Block above
+                    // count: eval( arrIngredient.slice(0,unitIndex).join("+").replace("-","+") ), // Important 
                 
                 objIngredient= {
-
-                    // Alternative to CODE BLOCK 1
-                        // count: eval( arrIngredient.slice(0,unitIndex+1).join("+") ), // ERROR Here!
-                        // count: eval( arrIngredient.slice(0,unitIndex).join("+").replace("-","+") ), // Important 
                     count,
                     unit: arrIngredient[unitIndex],
                     ingredient: arrIngredient.slice(unitIndex+1).join(" ")
@@ -114,7 +91,7 @@ export default class Recipe {
                 }
                 // console.log('hi2');
                 
-            } else if (unitIndex === -1) {
+            } else if (unitIndex === -1 || arrIngredient.slice(0,unitIndex).length >2) {
                 // No Unit, No Count // True if unit was never matched with any word of ingredient sentence.
 
                 objIngredient= {
@@ -125,7 +102,7 @@ export default class Recipe {
                 // console.log('hi3');
 
             }
-            console.log(`test ${ido}: ${curIngredient}`);
+            // console.log(`test ${ido}: ${curIngredient}`);
         //    return curIngredient; 
            return objIngredient; 
         });
