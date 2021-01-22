@@ -36,6 +36,7 @@ export default class Recipe {
 
         const unitsLong = ['tablespoons','tablespoon','ounces','ounce','teaspoons','teaspoon','cups','slices','pounds']
         const unitsShort = ['tbsp','tbsp','oz','oz','tsp','tsp','cup','slice','pound']
+        const units = [...unitsShort ,'g','kg'] // Will not be used for shortening the units .... Will after that to trace the unitIndex
         
         const newIngredients = this.ingredients.map((el,ido) => {
 
@@ -47,7 +48,8 @@ export default class Recipe {
             curIngredient = curIngredient.replace(/ *\([^)]*\) */g, " ");
 
             let arrIngredient = curIngredient.split(" ");
-            const unitIndex = arrIngredient.findIndex( curWordIngredient => unitsShort.includes(curWordIngredient)); // the place of first identified unit
+            // const unitIndex = arrIngredient.findIndex( curWordIngredient => unitsShort.includes(curWordIngredient)); // the place of first identified unit
+            const unitIndex = arrIngredient.findIndex( curWordIngredient => units.includes(curWordIngredient)); // added to trace the newly added units as well
 
             let objIngredient ;
 

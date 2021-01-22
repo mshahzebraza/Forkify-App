@@ -51,8 +51,10 @@ const controlRecipe = async () => {
     
     if (id) {
         // Prepare UI for the changes
-        // 1. Clear the last Recipe
+        // a. Clear the last Recipe
         elements.recipe.innerHTML= ""
+        // b. Render Loader
+        renderLoader(elements.recipe);
         
         // Create the recipe object from class and save into the state object
         state.recipe = new Recipe(id);
@@ -61,17 +63,15 @@ const controlRecipe = async () => {
         try {
             // Get Recipes using the Id
             await state.recipe.getRecipe();
+            state.recipe.parseIngredients();
     
             // calculate time and servings
             state.recipe.calcTime();
             state.recipe.calcServing();
 
             // Render Recipe
-            console.log(state.recipe.ingredients);
-            state.recipe.parseIngredients();
-            console.log(state.recipe.ingredients);
-            recipeView.renderRecipe(state.recipe)
-
+            clearLoader();
+            recipeView.renderRecipe(state.recipe);
             
         } catch (error) {
             alert(error)

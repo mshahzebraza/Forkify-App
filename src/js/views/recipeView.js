@@ -70,8 +70,9 @@ export const renderRecipe = recipe => {
             <ul class="recipe__ingredient-list">
                 ${
                     recipe.ingredients.map(createIngredient )
-                    .join('') 
                     // contains an array whose entries contain finalized markup of each ingredient
+                    .join('') 
+                    // The array of the markUp (string) is now joined to form a mega-string of Markup containing all ingredients at one time
                 }
             </ul>
 

@@ -29,4 +29,8 @@ export const renderLoader = parent => {
 export const clearLoader = ()=>{
     const loader = document.querySelector(`.${elementStrings.loader}`);
     loader.parentElement.removeChild(loader);
+    
+    // ALternatively
+    // const loaders = document.querySelectorAll(`.${elementStrings.loaders}`);
+    // loaders.forEach( el => el.parentElement.removeChild(el) )
 }
