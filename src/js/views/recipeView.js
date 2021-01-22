@@ -1,6 +1,8 @@
 import { elements } from "./base";
 
 const createIngredient = (curIng)=> {
+    // This is not getting any value in the curIng variable
+
         const ingredientMarkup = `<li class="recipe__item">
             <svg class="recipe__icon">
                 <use href="img/icons.svg#icon-check"></use>
@@ -11,8 +13,10 @@ const createIngredient = (curIng)=> {
                 ${curIng.ingredient}
             </div>
         </li>`;
-        console.log(elements.ingredientList);
-        elements.ingredientList.insertAdjacentHTML("beforeend",ingredientMarkup)
+
+        return ingredientMarkup;
+
+        // elements.ingredientList.insertAdjacentHTML("beforeend",ingredientMarkup)
     }
 
 export const renderRecipe = recipe => {
@@ -64,6 +68,11 @@ export const renderRecipe = recipe => {
 
         <div class="recipe__ingredients">
             <ul class="recipe__ingredient-list">
+                ${
+                    recipe.ingredients.map(createIngredient )
+                    .join('') 
+                    // contains an array whose entries contain finalized markup of each ingredient
+                }
             </ul>
 
             <button class="btn-small recipe__btn">
