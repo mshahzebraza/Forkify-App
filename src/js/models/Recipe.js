@@ -104,12 +104,31 @@ export default class Recipe {
                 // console.log('hi3');
 
             }
-            // console.log(`test ${ido}: ${curIngredient}`);
-        //    return curIngredient; 
            return objIngredient; 
         });
         this.ingredients = newIngredients;        
-        // console.log(this.ingredients);
+        console.log(this.ingredients);
+        
+    }
+
+    updateServings (type) {
+        // Servings
+        // (type === "dec") ? this.servings++ : this.servings--; 
+        let oldServings=this.servings;
+        if (type = "inc") {
+            this.servings++;
+        } else if (type = "dec") {
+            this.servings--;
+        }
+
+        // Ingredients
+        const newIngredients = this.ingredients.map(curIngObj => {
+            curIngObj.count *= (this.servings)/(oldServings);
+            return curIngObj;
+        })
+        // console.log(newIngredients);
+
+        this.ingredients = newIngredients;
         
     }
 

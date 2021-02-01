@@ -87,6 +87,18 @@ const controlRecipe = async () => {
 // To Trigger the controlRecipe
 ['hashchange', 'load'].forEach(curEvent => window.addEventListener(curEvent,controlRecipe))
 
+// Handling Recipe button clicks
+elements.recipe.addEventListener('click', e=>{
+    if ( e.target.matches('.btn-increase, .btn-increase *') ) {
+        state.recipe.updateServings('inc')
+    } else if ( state.recipe.servings >1 && e.target.matches('.btn-decrease, .btn-decrease *') ) {
+        state.recipe.updateServings('dec')
+    }
+    recipeView.updateServingIngredients(state.recipe)
+    // console.log(state.recipe.ingredients);
+})
+
+
 // To Avoid the reload on submit & trigger the controlSearch
 elements.searchForm.addEventListener('submit', e => {
     e.preventDefault();

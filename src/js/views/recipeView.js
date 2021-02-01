@@ -10,7 +10,7 @@ const formatCount = (count) => {
         } 
         
         const [int, dec] = count.toString().split('.').map(el => parseInt(el,10));
-        const fr = new Fraction( parseFloat(`0.${dec}`,10) )
+        const fr = new Fraction( parseFloat(`0.${dec}`,10).toFixed(2) );
     
         if (int === 0) {
             return `${fr.numerator}/${fr.denominator}`
@@ -69,12 +69,12 @@ export const renderRecipe = recipe => {
                 <span class="recipe__info-text"> servings</span>
 
                 <div class="recipe__info-buttons">
-                    <button class="btn-tiny">
+                    <button class="btn-tiny btn-decrease">
                         <svg>
                             <use href="img/icons.svg#icon-circle-with-minus"></use>
                         </svg>
                     </button>
-                    <button class="btn-tiny">
+                    <button class="btn-tiny btn-increase">
                         <svg>
                             <use href="img/icons.svg#icon-circle-with-plus"></use>
                         </svg>
@@ -126,4 +126,16 @@ export const renderRecipe = recipe => {
     `
     elements.recipe.insertAdjacentHTML('afterbegin', markup)
     recipe.ingredients.map(curIng => createIngredient(curIng) )
+}
+
+export const updateServingIngredients = (recipe) => {
+    // Update servings in html
+    document.querySelector('.recipe__info-data--people').textContent = recipe.servings; 
+    
+    // Update count in html
+    const countElements = Array.from(document.querySelectorAll('.recipe__count'));
+    countElements.forEach( (el,i) => {
+        el.textContent = formatCount(recipe.ingredients[i].count);        
+    });
+
 }
