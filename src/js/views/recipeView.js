@@ -1,4 +1,29 @@
 import { elements } from "./base";
+import { Fraction } from 'fractional'
+
+const formatCount = (count) => {
+    if (count){
+
+        // True If the count does not contain decimal 
+        if ( Math.ceil(count)-count === 0 ) {
+            return count;
+        } 
+        
+        const [int, dec] = count.toString().split('.').map(el => parseInt(el,10));
+        const fr = new Fraction( parseFloat(`0.${dec}`,10) )
+    
+        if (int === 0) {
+            return `${fr.numerator}/${fr.denominator}`
+        } else if (int > 0) {
+            return `${int} ${fr.numerator}/${fr.denominator}`
+        }
+        
+    }
+    return '?'; // Executes only if there is no count or is undefined
+
+}
+
+
 
 const createIngredient = (curIng)=> {
     // This is not getting any value in the curIng variable
@@ -7,7 +32,7 @@ const createIngredient = (curIng)=> {
             <svg class="recipe__icon">
                 <use href="img/icons.svg#icon-check"></use>
             </svg>
-            <div class="recipe__count">${curIng.count}</div>
+            <div class="recipe__count">${formatCount(curIng.count)}</div>
             <div class="recipe__ingredient">
                 <span class="recipe__unit">${curIng.unit}</span>
                 ${curIng.ingredient}

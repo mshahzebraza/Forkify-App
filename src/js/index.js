@@ -55,6 +55,8 @@ const controlRecipe = async () => {
         elements.recipe.innerHTML= ""
         // b. Render Loader
         renderLoader(elements.recipe);
+
+        if (state.search) searchView.highlightSelected(id)
         
         // Create the recipe object from class and save into the state object
         state.recipe = new Recipe(id);

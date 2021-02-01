@@ -236,15 +236,15 @@ body {
     padding: 1.5rem 3rem;
     transition: all .3s;
     border-right: 1px solid #fff;
-    background-color: unset;
+    /* background-color: unset; */
     text-decoration: none; }
   .results__link:hover,
   .likes__link:hover {
-    background-color: #F9F5F3;
+    background-color: #8bc4fda8;
     transform: translateY(-2px); }
   .results__link--active,
   .likes__link--active {
-    background-color: #F9F5F3; }
+    background-color: #8bc4fda8; }
   .results__fig,
   .likes__fig {
     flex: 0 0 5.5rem;
