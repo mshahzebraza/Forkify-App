@@ -3,6 +3,7 @@ import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import { elements, renderLoader, clearLoader } from './views/base';
 import Recipe from './models/Recipe';
+import List from './models/List';
 
 
 // Global State
@@ -121,3 +122,6 @@ elements.searchResPages.addEventListener('click', e=>{
         searchView.renderResults(state.search.recipes, gotoPage);
     }
 })
+
+
+window.l = new List();
