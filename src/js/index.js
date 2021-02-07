@@ -16,9 +16,9 @@ const state = {};
 const controlSearch = async () => {
 
     // 1. Read query from view
-    // const query = searchView.getInput();
+    const query = searchView.getInput();
     // Testing
-    const query = 'pizza';
+    // const query = 'pizza';
     
 
     if (query) {
