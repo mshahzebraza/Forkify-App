@@ -6,7 +6,9 @@ export const elements = {
     searchResPages: document.querySelector('.results__pages'),
     recipe: document.querySelector('.recipe'),
     shoppingList: document.querySelector('.shopping__list'),
-    ingredients: document.querySelector('.recipe__ingredients')
+    ingredients: document.querySelector('.recipe__ingredients'),
+    likesMenu: document.querySelector('.likes__field'),
+    likesList: document.querySelector('.likes__panel')
 }
 
 // Why do we need to export this object... this wont affect the performance

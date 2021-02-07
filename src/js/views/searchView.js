@@ -19,10 +19,10 @@ export const highlightSelected = (id) =>{
         el.classList.remove(`results__link--active`)
     });
     
-    document.querySelector(`a[href="#${id}"]`).classList.add('results__link--active');
+    document.querySelector(`.results__link[href="#${id}"]`).classList.add('results__link--active');
 }
 
-const limitString = (el, limit=20) => {
+export const limitString = (el, limit=20) => {
     
     const newTitle=[];
     

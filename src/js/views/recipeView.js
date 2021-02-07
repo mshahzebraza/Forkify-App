@@ -44,7 +44,7 @@ const createIngredient = (curIng)=> {
         // elements.ingredientList.insertAdjacentHTML("beforeend",ingredientMarkup)
     }
 
-export const renderRecipe = recipe => {
+export const renderRecipe = (recipe, isLiked) => {
     let markup = `
             <figure class="recipe__fig">
                 <img src="${recipe.img}" alt="${recipe.title}" class="recipe__img">
@@ -84,7 +84,7 @@ export const renderRecipe = recipe => {
             </div>
             <button class="recipe__love">
                 <svg class="header__likes">
-                    <use href="img/icons.svg#icon-heart-outlined"></use>
+                    <use href="img/icons.svg#icon-heart${isLiked ? '' : '-outlined'} "></use>
                 </svg>
             </button>
         </div>
@@ -126,6 +126,7 @@ export const renderRecipe = recipe => {
     `
     elements.recipe.insertAdjacentHTML('afterbegin', markup)
     recipe.ingredients.map(curIng => createIngredient(curIng) )
+    
 }
 
 export const updateServingIngredients = (recipe) => {
