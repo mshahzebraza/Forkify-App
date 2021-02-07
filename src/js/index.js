@@ -82,9 +82,6 @@ const controlRecipe = async () => {
         }   
     }
 }
-// Testing
-state.likes = new Likes(); // just to access the method isLiked() at the start of program as we do not have likes class initialized in the beginning
-likesView.toggleLikeMenu(state.likes.getNumLikes())
 
 
 // List Controller
@@ -137,6 +134,22 @@ const controlLikes = (recipe) => {
     likesView.toggleLikeMenu(state.likes.getNumLikes())
 
 }
+
+// Restore Like recipes on page load
+window.addEventListener('load', ()=>{
+    state.likes = new Likes(); // just to access the method isLiked() at the start of program as we do not have likes class initialized in the beginning
+
+    // Restore Likes
+    state.likes.readStorage()
+    
+    // Toggle menu btn 
+    likesView.toggleLikeMenu(state.likes.getNumLikes())
+
+    // Rendering the likes from localStorage to the page again.
+    state.likes.likes.forEach(likedItem => likesView.renderLikeListItem(likedItem))
+    // Important: the two likes above means one is for the Class Object named 'Likes'... And second is the Array named 'likes' inside item... This array contains each like recipe item in the likeList as an object
+    
+})
 
 // Handling delete and update list item events
 elements.shoppingList.addEventListener('click', e => {
