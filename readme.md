@@ -2,7 +2,7 @@
 An app that helps people search, select & shop their favourite recipes.
 
 ## Project Details
-This project is my debut in making WEB APPS
+This project is my debut in making Web App Development. Also MVC architecture was implemented in its development along with the use of Webpack & Babel.
 
 
 ##### Other Details
